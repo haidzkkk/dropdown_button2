@@ -937,6 +937,8 @@ class DropdownButtonFormField2<T> extends FormField<T> {
   /// `autofocus`, and `decoration`  parameters must not be null.
   DropdownButtonFormField2({
     super.key,
+    double? height,
+    double? width,
     required List<DropdownItem<T>>? items,
     DropdownButtonBuilder? selectedItemBuilder,
     ValueListenable<T?>? valueListenable,
@@ -1021,57 +1023,61 @@ class DropdownButtonFormField2<T> extends FormField<T> {
                       //helper: effectiveDecoration.helper,
                       helperText: effectiveDecoration.helperText,
                     ),
-                    child: DropdownButtonHideUnderline(
-                      child: DropdownButton2<T>._formField(
-                        items: items,
-                        selectedItemBuilder: selectedItemBuilder,
-                        valueListenable: valueListenable,
-                        multiValueListenable: multiValueListenable,
-                        hint: hint,
-                        disabledHint: disabledHint,
-                        onChanged: onChanged == null ? null : state.didChange,
-                        onMenuStateChange: onMenuStateChange,
-                        style: style,
-                        isDense: isDense,
-                        isExpanded: isExpanded,
-                        focusNode: focusNode,
-                        autofocus: autofocus,
-                        enableFeedback: enableFeedback,
-                        alignment: alignment,
-                        buttonStyleData: buttonStyleData,
-                        iconStyleData: iconStyleData,
-                        dropdownStyleData: dropdownStyleData,
-                        menuItemStyleData: menuItemStyleData,
-                        dropdownSearchData: dropdownSearchData,
-                        dropdownSeparator: dropdownSeparator,
-                        customButton: customButton,
-                        openWithLongPress: openWithLongPress,
-                        barrierDismissible: barrierDismissible,
-                        barrierColor: barrierColor,
-                        barrierLabel: barrierLabel,
-                        openDropdownListenable: openDropdownListenable,
-                        inputDecoration: effectiveDecoration
-                            // The error/helper widgets are displayed by an InputDecorator wrapper
-                            // that surrounds the DropdownButton FormField. This setup is crucial
-                            // to prevent the inkwell from covering the error or helper widget
-                            // and to ensure that the menu does not open below them.
-                            .updateSurroundingElements(
-                              error: null,
-                              errorText: null,
-                              //helper: null,
-                              helperText: null,
-                            )
-                            // This is crucial for the error border functionality to work.
-                            .copyWith(
-                              error: field.hasError ||
-                                      effectiveDecoration.error != null ||
-                                      effectiveDecoration.errorText != null
-                                  ? const SizedBox.shrink()
-                                  : null,
-                            ),
-                        isEmpty: isEmpty,
-                        isFocused: Focus.of(context).hasFocus,
-                      ),
+                    child: SizedBox(
+                      height: height,
+                      width: width,
+                      child: DropdownButtonHideUnderline(
+                        child: DropdownButton2<T>._formField(
+                          items: items,
+                          selectedItemBuilder: selectedItemBuilder,
+                          valueListenable: valueListenable,
+                          multiValueListenable: multiValueListenable,
+                          hint: hint,
+                          disabledHint: disabledHint,
+                          onChanged: onChanged == null ? null : state.didChange,
+                          onMenuStateChange: onMenuStateChange,
+                          style: style,
+                          isDense: isDense,
+                          isExpanded: isExpanded,
+                          focusNode: focusNode,
+                          autofocus: autofocus,
+                          enableFeedback: enableFeedback,
+                          alignment: alignment,
+                          buttonStyleData: buttonStyleData,
+                          iconStyleData: iconStyleData,
+                          dropdownStyleData: dropdownStyleData,
+                          menuItemStyleData: menuItemStyleData,
+                          dropdownSearchData: dropdownSearchData,
+                          dropdownSeparator: dropdownSeparator,
+                          customButton: customButton,
+                          openWithLongPress: openWithLongPress,
+                          barrierDismissible: barrierDismissible,
+                          barrierColor: barrierColor,
+                          barrierLabel: barrierLabel,
+                          openDropdownListenable: openDropdownListenable,
+                          inputDecoration: effectiveDecoration
+                          // The error/helper widgets are displayed by an InputDecorator wrapper
+                          // that surrounds the DropdownButton FormField. This setup is crucial
+                          // to prevent the inkwell from covering the error or helper widget
+                          // and to ensure that the menu does not open below them.
+                              .updateSurroundingElements(
+                            error: null,
+                            errorText: null,
+                            //helper: null,
+                            helperText: null,
+                          )
+                          // This is crucial for the error border functionality to work.
+                              .copyWith(
+                            error: field.hasError ||
+                                effectiveDecoration.error != null ||
+                                effectiveDecoration.errorText != null
+                                ? const SizedBox.shrink()
+                                : null,
+                          ),
+                          isEmpty: isEmpty,
+                          isFocused: Focus.of(context).hasFocus,
+                        ),
+                      )
                     ),
                   );
                 },
